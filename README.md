@@ -21,12 +21,17 @@
 
 ## 現有 widget
 
-| Widget | 解決什麼 | 需要能力 |
+| Widget | 解決什麼 | 需要什麼 |
 | --- | --- | --- |
 | `workspace-conductor` | 一句話把工作區排成這次要盯的樣子 | `ui.control` |
+| `backtest-doctor` | 回答「這份回測結果可不可信」，不是再給一次績效 | `ui.control`（待實機驗證） |
+| `dividend-calendar` | 這幾檔哪天除權息、配多少 | 免驗證公開資料 |
+| `monthly-revenue-digest` | 這幾檔最新月營收與月增／年增 | 免驗證公開資料 |
 
-規劃中的 10 個 widget、各自的痛點、用到什麼、風險，見
-[docs/ROADMAP.md](docs/ROADMAP.md)。
+後兩個不需要任何能力層級也不需要帳號，資料路徑已對真實端點驗證過。
+`backtest-doctor` 的邏輯尚未在連上 Shioaji Pro 的 session 實機跑過，先當 beta 用。
+規劃中的其餘 widget、各自的痛點、用到什麼、風險，以及已評估後捨棄的點子，
+見 [docs/ROADMAP.md](docs/ROADMAP.md)。
 
 ## 設計原則
 
@@ -93,7 +98,9 @@ plugins/shioaji-pro-widgets/
 │   ├── TWSE_OPENAPI.md              # 上市市場公開資料，主要來源
 │   ├── FINMIND.md                   # 三大法人與歷史面板資料
 │   └── TPEX_OPENAPI.md              # 上櫃／興櫃，補充用
-└── skills/<widget-name>/SKILL.md
+└── skills/<widget-name>/
+    ├── SKILL.md
+    └── references/                  # 選用，最多一個檔
 ```
 
 `references/` 裡的外部 API 事實都查證自官方一手來源並標註查證日期。

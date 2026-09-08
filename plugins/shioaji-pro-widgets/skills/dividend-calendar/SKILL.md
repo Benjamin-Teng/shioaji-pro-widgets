@@ -1,0 +1,55 @@
+---
+name: dividend-calendar
+description: |
+  Use when the user asks when a Taiwan stock goes ex-dividend or how much it pays —
+  "2330 什麼時候除息", "我這幾檔今年配多少", "下週有哪些要除權息", "6488 的除權息日",
+  "check the ex-dividend date for 2330". Reports dates and amounts from official
+  exchange open data; it does not advise whether to participate.
+  Trigger keywords: 除權息, 除息, 除權, 配息, 配股, 現金股利, 股票股利, 股利,
+  ex-dividend, ex-rights, dividend.
+---
+
+# 除權息行事曆
+
+**痛點**：手上或觀察中的股票哪天除權息、配多少，每年都要重查一次。
+**回答**：給一組代號，回報各自的除權息日期與配發內容，並標明資料的時間基準。
+
+## 前置
+
+不需要任何 Shioaji Pro 能力層級，也不需要帳號或 API key——TWSE 與 TPEx Open API
+免驗證。使用者沒給代號就問他要哪幾檔，不要自己挑股票。
+
+## 流程
+
+1. **先決定市場別。上市走 TWSE、上櫃走 TPEx，兩邊端點互不涵蓋。**
+   分不出來就兩邊都查，用哪邊有資料判定，並在回報裡說明是哪個市場。
+2. **預告表**（尚未除權息）：
+   - 上市：`GET https://openapi.twse.com.tw/v1/exchangeReport/TWT48U_ALL`
+   - 上櫃：`GET https://www.tpex.org.tw/openapi/v1/tpex_exright_prepost`
+3. **計算結果表**（已除，含參考價與當日漲跌停）：上櫃用
+   `https://www.tpex.org.tw/openapi/v1/tpex_exright_daily`；**上市沒有對應端點**，
+   缺這段就明說缺，不要拿預告表的數字充當結果。
+4. 兩邊端點**都不吃參數**，每次回傳全市場整包、沒有分頁。收斂到使用者那幾檔
+   是這個 widget 的工作，不是 API 的。同一次對話同一端點只打一次。
+5. **預告表裡有已經過去的日期**（實測 2026-09-09 取回的上櫃預告仍含 2026-08-31 的
+   紀錄）。**一律拿今天比對**，分開講「即將除權息」與「已經除過」，不要把過期的
+   當成未來排程。
+6. **配息金額帶浮點雜訊**（實測台積電回 `"7.000001"`，實際是 7 元）。顯示時
+   四捨五入到合理位數並照原樣保留來源值，不要宣稱是精確值。
+7. 欄位名、三種官方拼字錯誤、日期格式、TPEx 的必要標頭一律見
+   `references/FIELDS.md`。**不要憑印象拼欄位名**——拼錯會拿到空值而不是錯誤。
+
+## 輸出
+
+三行結論（查了幾檔、其中幾檔有排程、最近一檔是哪天）加一張小表：
+代號、名稱、除權息日、現金股利、股票股利、市場別。查無資料的代號單獨列出。
+
+**每次都要標時間基準**：TWSE 資料隔日上午才更新，所以它的「今天」其實是昨天；
+TPEx 約當日深夜更新。用 HTTP 回應的 `Last-Modified` 講，不要自己推算。
+
+## 不做
+
+- **不建議要不要參與**。只講日期與金額，不算「填息機率」、不比較殖利率高低、
+  不推論除息後股價。使用者問「值不值得參與」就說這個 widget 只提供事實。
+- 不下單、不讀帳務、不從公開資料推測使用者持有什麼。
+- 取不到資料就說取不到，不要用去年的數字或記憶中的配息補值。

@@ -19,7 +19,10 @@
    **盤中不要用它回答「現在多少」。**
 4. **沒有 CORS。** 回應不含任何 `Access-Control-*` 標頭，`OPTIONS` 回 405。
    瀏覽器端跨網域 fetch 會被擋；只能從伺服器端呼叫。
-5. **抓 swagger.json 要帶瀏覽器 User-Agent**，否則回 403。
+5. **瀏覽器等級標頭是必要的，資料端點也一樣**（2026-09-09 實測）：帶完整
+   `User-Agent`（含 `Mozilla/5.0 ... Chrome/...`）並加
+   `Referer: https://www.tpex.org.tw/`，否則會拿到 `403` 或 `520`。
+   只給 `-A "Mozilla/5.0"` 這種簡短 UA 實測仍可能 520。抓 `swagger.json` 同樣適用。
 
 ## 常用端點
 

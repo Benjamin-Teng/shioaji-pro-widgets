@@ -66,6 +66,8 @@ description: |
 
 ## 完成的定義
 
-1. 在真的連上 Shioaji Pro 的 session 裡跑過一次，輸出貼在 PR 或 commit 訊息裡。
-2. 缺少能力時的分支也跑過一次（例如未授予 `account.read`）。
+1. **用到 Shioaji Pro 能力的 widget**：在真的連上 Shioaji Pro 的 session 跑過一次，
+   輸出貼在 PR 或 commit 訊息裡；缺少能力時的分支也跑過一次（例如未授予 `account.read`）。
+2. **完全不碰 Shioaji Pro 的 widget**（只用公開資料）：對**真實端點**跑過一次並貼輸出，
+   且查無資料的分支也跑過一次。沒有 Pro session 可連不是略過驗證的理由，是換一種證據。
 3. `SKILL.md` 通過 `markdownlint-cli2`，0 error。
