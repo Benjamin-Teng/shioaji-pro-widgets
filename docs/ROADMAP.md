@@ -23,6 +23,10 @@
 schema 才能定案。解掉之後，這些 widget 大多是半小時內能寫完的尺寸。
 在那之前**不要照猜工具名**——見 `references/APP_TOOLS.md`。
 
+Shioaji API 本身能做到哪、做不到哪，見 `references/SHIOAJI_LIMITS.md`（基準 1.7.4）。
+**三件對設計影響最大的事**：條件單／停損單**沒有原生支援**（是本地輪詢，斷線就沒了）、
+訂單級**冪等不存在**（逾時要對帳不能重送）、財報／法人／分點／除權息 Shioaji **一律沒有**。
+
 下面每一節的「用到什麼」欄位中，**粗體**的是已在 `MCP_TOOLS.md` 有明文的 v1
 工具名；非粗體的是意圖描述，實作前要對 schema 確認。
 
@@ -103,6 +107,9 @@ trades 預設 20 最大 100，且每檔只保留最新 500 筆。
 **產出**：這張單送出去會發生什麼——距漲跌停多遠、檔位對不對、對手方厚不厚。
 
 **用到什麼**：**`preview_order`** + `market.read` 讀快照與五檔。
+Contract V2 的處置股欄位（`disposition_level`、`disposition_match_interval_min`、
+`disposition_max_lots_single_order`、`disposition_prepay_ratio`、`attention_flag`）
+可以直接判斷「這檔今天是不是分盤交易、單筆有沒有張數上限」，不必自己查公告。
 
 **DEMO 亮點**：有「下單」的戲劇性但**零成交風險**，現場演最安全。
 
@@ -148,9 +155,10 @@ trades 預設 20 最大 100，且每檔只保留最新 500 筆。
 
 **產出**：手上（或觀察中）標的的資券餘額變化與券源狀況，異常時才出聲。
 
-**用到什麼**：`market.read` 的資券餘額與券源查詢。上櫃標的可用
-TPEx `/tpex_mainboard_margin_balance` 交叉驗證，**但那是盤後日更**，
-且**只有上櫃沒有上市**。
+**用到什麼**：`market.read` 的資券餘額與券源查詢。**Shioaji 1.7.4 的 Contract V2
+新增了現成的券賣資格欄位**——`StockInfo` 的 `margin_shortable`／`sbl_shortable`／
+`below_ref_shortable`（來源是官方每日名單），不必自己從餘額推斷「還能不能券賣」。
+上市標的的融資融券餘額可用 TWSE `/exchangeReport/MI_MARGN` 交叉驗證，**但那是盤後日更**。
 
 **DEMO 亮點**：冷門但很專業，會讓懂的人眼睛一亮。
 
@@ -164,14 +172,17 @@ TPEx `/tpex_mainboard_margin_balance` 交叉驗證，**但那是盤後日更**�
 
 **產出**：**只回三檔**——與使用者自選股／持倉有交集、且今天行為異常的標的。
 
-**用到什麼**：`market.read` 的排行掃描（漲跌幅、成交量、成交金額、振幅）
-與自選股，取交集後再收斂。需要基本面佐證時才逐檔問 FinMind。
+**用到什麼**：**優先用 Shioaji 1.7.4 的 market signals**——`LimitScanner`（觸及／
+接近漲跌停、漲停打開）、`PriceMoveScanner`（1 秒內漲跌 >1% 且 ≥3 檔的急拉急殺）、
+`VolumeScanner.burst()`（單筆成交金額爆量）。這比自己從排行榜推斷「異常」精準得多，
+而且是即時推送。再與自選股／持倉取交集收斂。
 
-**DEMO 亮點**：輸出乾淨——別人給你兩百檔，它給你三檔。
+**DEMO 亮點**：輸出乾淨——別人給你兩百檔，它給你三檔，而且說得出為什麼是這三檔。
 
-**風險**：**FinMind 免費版不能撈全市場**（帶 `data_id` 查單檔才免費），
-所以「先用排行收斂到 3–5 檔、再逐檔查明細」不是效能優化，是硬性順序。
-見 `references/FINMIND.md`。
+**風險**：signals 的**門檻寫死不可調**（>1%、≥3 檔、1 秒冷卻都是文件定死的），
+所以 widget 只能選訂閱哪些規則，不能調靈敏度。範圍限台股股票
+（`TSE`／`OTC`），指數與期權沒有。所有訊號共用同一個全域 callback，要自行分派。
+需要基本面佐證時才逐檔問 FinMind，且**免費版帶 `data_id` 查單檔才免費**。
 
 ---
 

@@ -45,6 +45,7 @@ plugins/shioaji-pro-widgets/
 ├── .codex-plugin/plugin.json
 ├── references/                      # 所有 widget 共用的知識
 │   ├── APP_TOOLS.md                 # 能力層級與 v1 語意工具名
+│   ├── SHIOAJI_LIMITS.md            # Shioaji API 能力邊界（基準 1.7.4）
 │   ├── DATA_SOURCES.md              # 來源優先序（最容易出錯的地方）
 │   ├── TWSE_OPENAPI.md              # 上市市場公開資料，主要來源
 │   ├── FINMIND.md                   # 三大法人與歷史面板資料
