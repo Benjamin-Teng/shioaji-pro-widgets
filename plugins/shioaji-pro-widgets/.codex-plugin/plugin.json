@@ -5,6 +5,8 @@
   "author": {
     "name": "Benjamin Teng"
   },
+  "homepage": "https://github.com/Benjamin-Teng/shioaji-pro-widgets",
+  "repository": "https://github.com/Benjamin-Teng/shioaji-pro-widgets",
   "license": "MIT",
   "keywords": [
     "shioaji-pro",
@@ -30,6 +32,7 @@
     "defaultPrompt": [
       "Set up my Shioaji Pro workspace for watching 2330.",
       "What should I be watching in my portfolio today?"
-    ]
+    ],
+    "websiteURL": "https://github.com/Benjamin-Teng/shioaji-pro-widgets"
   }
 }
