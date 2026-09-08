@@ -1,12 +1,6 @@
 ---
 name: dividend-calendar
-description: |
-  Use when the user asks when a Taiwan stock goes ex-dividend or how much it pays —
-  "2330 什麼時候除息", "我這幾檔今年配多少", "下週有哪些要除權息", "6488 的除權息日",
-  "check the ex-dividend date for 2330". Reports dates and amounts from official
-  exchange open data; it does not advise whether to participate.
-  Trigger keywords: 除權息, 除息, 除權, 配息, 配股, 現金股利, 股票股利, 股利,
-  ex-dividend, ex-rights, dividend.
+description: "當使用者問台股何時除權息或配多少時使用 —— 「2330 什麼時候除息」「我這幾檔今年配多少」「下週有哪些要除權息」「6488 的除權息日」。用證交所與櫃買中心的公開資料回報日期與配發金額，不建議要不要參與。觸發詞包含 除權息、除息、除權、配息、配股、現金股利、股票股利、股利、ex-dividend、dividend。"
 ---
 
 # 除權息行事曆

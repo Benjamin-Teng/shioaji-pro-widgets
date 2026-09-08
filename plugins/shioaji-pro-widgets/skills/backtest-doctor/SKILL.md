@@ -1,12 +1,6 @@
 ---
 name: backtest-doctor
-description: |
-  Use when the user wants a sanity check on a backtest they already ran in
-  Shioaji Pro — "這個回測可以信嗎", "幫我看一下回測結果", "為什麼回測很漂亮實盤卻虧",
-  "這條曲線是不是過度擬合", "review my backtest result". Reads an existing backtest
-  and reports whether its numbers are trustworthy; it does not run or design strategies.
-  Trigger keywords: 回測, 回測績效, 過度擬合, 最大回撤, 勝率, 樣本數, backtest, drawdown,
-  overfitting, equity curve.
+description: "當使用者想確認一份已經在 Shioaji Pro 跑完的回測可不可靠時使用 —— 「這個回測可以信嗎」「幫我看一下回測結果」「為什麼回測很漂亮實盤卻虧」「這條曲線是不是過度擬合」「review my backtest result」。讀既有回測並回報數字站不站得住腳，不跑回測、不設計策略。觸發詞包含 回測、回測績效、過度擬合、最大回撤、勝率、樣本數、backtest、drawdown、overfitting。"
 ---
 
 # 回測體檢

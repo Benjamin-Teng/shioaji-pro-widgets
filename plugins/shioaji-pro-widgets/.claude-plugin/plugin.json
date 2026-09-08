@@ -1,6 +1,6 @@
 {
   "name": "shioaji-pro-widgets",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Small widget skills for Shioaji Pro. Each widget solves exactly one daily investor pain point using the App's semantic MCP tools, plus TPEx Open API and FinMind public data.",
   "author": {
     "name": "Benjamin Teng"

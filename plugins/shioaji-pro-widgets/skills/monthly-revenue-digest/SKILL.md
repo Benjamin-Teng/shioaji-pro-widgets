@@ -1,12 +1,6 @@
 ---
 name: monthly-revenue-digest
-description: |
-  Use when the user asks about Taiwan listed companies' monthly revenue —
-  "台泥上個月營收多少", "我這幾檔的月營收", "2330 營收年增多少",
-  "這個月有誰營收創新高", "check monthly revenue for 1101". Reports the official
-  MOPS monthly revenue figures as-is; it does not interpret them as buy or sell.
-  Trigger keywords: 月營收, 營收, 營業收入, 年增, 月增, 累計營收, MoM, YoY,
-  monthly revenue.
+description: "當使用者問台股上市櫃公司月營收時使用 —— 「台泥上個月營收多少」「我這幾檔的月營收」「2330 營收年增多少」「這個月有誰營收創新高」。照實回報公開資訊觀測站的月營收數字，不解釋成因也不推論股價。觸發詞包含 月營收、營收、營業收入、年增、月增、累計營收、MoM、YoY、monthly revenue。"
 ---
 
 # 月營收速讀

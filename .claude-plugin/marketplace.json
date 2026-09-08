@@ -10,7 +10,7 @@
       "name": "shioaji-pro-widgets",
       "source": "./plugins/shioaji-pro-widgets",
       "description": "Widget skills built on Shioaji Pro semantic MCP tools, with TPEx Open API and FinMind as supplementary public data sources",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "author": {
         "name": "Benjamin Teng"
       }

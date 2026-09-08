@@ -1,11 +1,6 @@
 ---
 name: workspace-conductor
-description: |
-  Use when the user wants their Shioaji Pro workspace arranged for watching a
-  specific stock or futures contract — "幫我開 2330 的盤中監控版面", "把版面切成
-  看台指期", "recall my swing-trade layout", "這個版面太亂幫我整理". Arranges
-  panels and layouts through the App's semantic tools; it does not trade.
-  Trigger keywords: 版面, 佈局, layout, panel, 監控畫面, workspace, 開盤準備.
+description: "當使用者想把 Shioaji Pro 工作區排成盯某檔股票或期貨的樣子時使用 —— 「幫我開 2330 的盤中監控版面」「把版面切成看台指期」「recall my swing-trade layout」「這個版面太亂幫我整理」。透過 App 的語意工具排面板與版面，不下單。觸發詞包含 版面、佈局、layout、panel、監控畫面、workspace、開盤準備。"
 ---
 
 # 版面指揮官

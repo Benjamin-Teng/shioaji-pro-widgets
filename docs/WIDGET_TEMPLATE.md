@@ -20,14 +20,18 @@ plugins/shioaji-pro-widgets/skills/<widget-name>/
 
 `<widget-name>` 用 kebab-case，名字講「解決什麼」而非「用什麼技術」。
 
+**`description` 一定要寫成單行雙引號字串，不要用 YAML 區塊語法 `|`。**
+Shioaji Pro 的 skill 清單不解析區塊純量，用 `|` 會整段顯示成空白（只剩一個 `|`），
+使用者看不到說明、觸發詞形同沒寫。Claude Code 兩種都吃，所以本機看起來正常，
+要到 Shioaji Pro 裡才會發現——不要用本機顯示正常當作通過。
+內文若要引用使用者的話，用「」不要用半形引號，才不必跳脫。
+
 ## SKILL.md 骨架
 
 ```markdown
 ---
 name: <widget-name>
-description: |
-  Use when <使用者會怎麼開口>. <這個 widget 回答哪一個問題>.
-  Trigger keywords: <中英文觸發詞>.
+description: "<使用者會怎麼開口>。<這個 widget 回答哪一個問題>。觸發詞包含 <中英文觸發詞>。"
 ---
 
 # <中文標題>
