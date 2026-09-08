@@ -30,8 +30,8 @@
 - **不下單**：預設只到 `trade.preview`；`place_order` 僅在已驗證的模擬環境、
   且使用者當下明確要求時才碰。
 - **不給投資建議**：陳述事實與計算，不做買賣結論、不預測價格。
-- **選對來源**：Shioaji Pro 原生工具 → Shioaji API → TPEx Open API → FinMind，
-  依序取第一個能回答的。規則見
+- **選對來源**：Shioaji Pro 原生工具 → Shioaji API → TWSE Open API → FinMind → TPEx，
+  依序取第一個能回答的。規則與「已排除」清單見
   [references/DATA_SOURCES.md](plugins/shioaji-pro-widgets/references/DATA_SOURCES.md)。
 
 寫新 widget 前先讀 [docs/WIDGET_TEMPLATE.md](docs/WIDGET_TEMPLATE.md)。
@@ -46,8 +46,9 @@ plugins/shioaji-pro-widgets/
 ├── references/                      # 所有 widget 共用的知識
 │   ├── APP_TOOLS.md                 # 能力層級與 v1 語意工具名
 │   ├── DATA_SOURCES.md              # 來源優先序（最容易出錯的地方）
-│   ├── FINMIND.md
-│   └── TPEX_OPENAPI.md
+│   ├── TWSE_OPENAPI.md              # 上市市場公開資料，主要來源
+│   ├── FINMIND.md                   # 三大法人與歷史面板資料
+│   └── TPEX_OPENAPI.md              # 上櫃／興櫃，補充用
 └── skills/<widget-name>/SKILL.md
 ```
 
