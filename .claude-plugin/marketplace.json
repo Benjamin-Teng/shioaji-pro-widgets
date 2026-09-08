@@ -1,0 +1,19 @@
+{
+  "name": "shioaji-pro-widgets",
+  "owner": {
+    "name": "Benjamin Teng",
+    "url": "https://github.com/ben0315"
+  },
+  "description": "Small, single-purpose widget skills for Shioaji Pro. Each widget solves one daily pain point for a Taiwan retail investor.",
+  "plugins": [
+    {
+      "name": "shioaji-pro-widgets",
+      "source": "./plugins/shioaji-pro-widgets",
+      "description": "Widget skills built on Shioaji Pro semantic MCP tools, with TPEx Open API and FinMind as supplementary public data sources",
+      "version": "0.1.0",
+      "author": {
+        "name": "Benjamin Teng"
+      }
+    }
+  ]
+}

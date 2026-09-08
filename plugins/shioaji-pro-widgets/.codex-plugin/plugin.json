@@ -1,0 +1,35 @@
+{
+  "name": "shioaji-pro-widgets",
+  "version": "0.1.0",
+  "description": "Small widget skills for Shioaji Pro. Each widget solves exactly one daily investor pain point using the App's semantic MCP tools, plus TPEx Open API and FinMind public data.",
+  "author": {
+    "name": "Benjamin Teng"
+  },
+  "license": "MIT",
+  "keywords": [
+    "shioaji-pro",
+    "shioaji",
+    "trading",
+    "taiwan",
+    "widgets",
+    "skills",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Shioaji Pro Widgets",
+    "shortDescription": "One-pain-point widgets for Shioaji Pro",
+    "longDescription": "A growing collection of small, single-purpose skills that ride on Shioaji Pro's semantic MCP tools. Each widget answers one question a Taiwan investor asks every day, and reads only what that answer needs.",
+    "developerName": "Benjamin Teng",
+    "category": "Finance",
+    "capabilities": [
+      "Read",
+      "Interactive"
+    ],
+    "brandColor": "#D71920",
+    "defaultPrompt": [
+      "Set up my Shioaji Pro workspace for watching 2330.",
+      "What should I be watching in my portfolio today?"
+    ]
+  }
+}

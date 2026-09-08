@@ -1,0 +1,41 @@
+---
+name: workspace-conductor
+description: |
+  Use when the user wants their Shioaji Pro workspace arranged for watching a
+  specific stock or futures contract — "幫我開 2330 的盤中監控版面", "把版面切成
+  看台指期", "recall my swing-trade layout", "這個版面太亂幫我整理". Arranges
+  panels and layouts through the App's semantic tools; it does not trade.
+  Trigger keywords: 版面, 佈局, layout, panel, 監控畫面, workspace, 開盤準備.
+---
+
+# 版面指揮官
+
+**痛點**：每天開盤前手動拖面板、換標的、重排版面，同樣的動作重複一輩子。
+**回答**：一句話把工作區排成這次要盯的樣子，並回報實際排出來的結果。
+
+## 前置
+
+需要 `ui.control`。沒有就直說缺這個能力，不要改用其他方式模擬。
+版面操作**不需要**、也不會取得帳務或交易權限。
+
+## 流程
+
+1. 先讀狀態：`get_app_state` 與 `list_panels`，知道現在有什麼再動手。
+2. 有現成版面就用現成的：`apply_layout`，並帶上 `source`（`preset` 或
+   `profile`）與 `name`。使用者說「我平常那個版面」時，先列出可用版面請他指認，
+   不要猜。
+3. 沒有對應版面才逐個組：`select_contract` 決定主標的，
+   `add_panel` / `remove_panel` 調整面板，`set_panel_pin` 釘住要獨立於連動的面板
+   （帶合約代號＝釘住；省略代號＝恢復連動）。
+4. **版面變更一律序列化執行**，不要並行；panel ID 與版面名稱原樣傳遞。
+5. 收尾再讀一次 `list_panels` 驗證，用實際回傳回報，不要用你以為做了什麼回報。
+
+## 輸出
+
+三行：主標的是什麼、現在有哪幾個面板、哪些被釘住。
+接一張小表列 panel 與其標的。變更失敗的項目單獨列出並說明原因。
+
+## 不做
+
+不下單、不讀帳務、不改自訂指標或策略。
+使用者要求的動作若需要其他能力層級，說明缺什麼並停在這裡。
