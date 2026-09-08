@@ -48,7 +48,7 @@
 | 1 | Shioaji Pro 原生 MCP tools | 使用者的帳務、持倉、下單、版面、指標、回測 |
 | 2 | Shioaji API | 即時與歷史行情、資券餘額、券源、市場訊號 |
 | 3 | TWSE Open API | 上市市場公開盤後統計、月營收、財報 |
-| 4 | FinMind（免費版） | 三大法人、歷史面板資料 |
+| 4 | FinMind | 三大法人、基本面；Sponsor 另有券商分點與分K |
 | 5 | TPEx Open API | 只在標的確定為上櫃時 |
 
 完整規則與每個來源的坑見
@@ -58,8 +58,9 @@
 
 寫在這裡，是為了讓下一個人不用再查一次：
 
-- **券商分點進出**：官方只有帶驗證碼的互動式網頁、無 API；FinMind 的
-  `TaiwanStockTradingDailyReport` 是付費 Sponsor 等級。免費前提下不可行。
+- **券商分點進出（免費管道）**：官方只有帶驗證碼的互動式網頁、無 API。
+  FinMind 的 `TaiwanStockTradingDailyReport` 需要 **Sponsor 等級**——
+  有訂閱就能做，Free 等級不成立。
 - **基金完整持股明細**：SITCA 自民國 104 年 6 月起停更，只剩月前十大與季佔淨值
   1% 以上。想看投信調節請改用三大法人的投信買賣超。
 - **三大法人不在 TWSE OpenAPI**：143 個端點全文掃描沒有這個主題，要走 FinMind。
